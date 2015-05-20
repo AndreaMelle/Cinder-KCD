@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="SampleApp">
+      <UniqueIdentifier>{12c4aaa5-15eb-44d5-8620-5b3fbd203d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KCDSource">
+      <UniqueIdentifier>{2bc08336-37cb-424f-8e6d-c31f254b798e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Extras">
+      <UniqueIdentifier>{317b9033-7286-4465-b137-2b53e732b330}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\KCDApp.h">
+      <Filter>SampleApp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\KCDDevice.h">
+      <Filter>KCDSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Process.h">
+      <Filter>KCDSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\KCDUtils.h">
+      <Filter>KCDSource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\GlobalTime.h">
+      <Filter>Extras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Subject.h">
+      <Filter>Extras</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\KCDApp.cpp">
+      <Filter>SampleApp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KCDDevice.cpp">
+      <Filter>KCDSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Process.cpp">
+      <Filter>KCDSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KCDRenderer.cpp">
+      <Filter>KCDSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\IKCDBindable.cpp">
+      <Filter>KCDSource</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GlobalTime.cpp">
+      <Filter>Extras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KCDActiveUserEventManager.cpp">
+      <Filter>KCDSource</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
