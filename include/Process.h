@@ -16,11 +16,9 @@ public:
 	void stop();
 
 	std::function<void()> mThreadCallback;
-	std::atomic_bool mNewData;
 	std::atomic_bool mRunning;
 	std::shared_ptr<std::thread> mThread;
-
-
+	//std::atomic_bool mNewData;
 };
 
 #endif //__PROCESS_H__

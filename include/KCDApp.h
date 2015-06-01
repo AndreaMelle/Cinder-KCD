@@ -9,13 +9,15 @@
 #include "cinder/ImageIo.h"
 #include "cinder/qtime/QuickTime.h"
 #include <vector>
-#include "KCDDevice.h"
+#include "KCDPipeline.h"
+#include "KCDDeviceStage.h"
+#include "Subject.h"
 
 #define DEBUG_DRAW 1
 #define NANO100_TO_ONE_SECOND 10000000.0
+#define PROFILE_KINECT_FPS 1
 
-
-class KCDApp : public ci::app::AppNative
+class KCDApp : public ci::app::AppNative, public Observer<kcd::ActiveUserEvent>, public Observer<kcd::BodyJointEvent>
 {
 public:
 	void setup();
@@ -27,19 +29,25 @@ public:
 	void prepareSettings(ci::app::AppBasic::Settings* settings);
 	void shutdown();
 
-private:
+	virtual void onEvent(kcd::ActiveUserEvent what, const Subject<kcd::ActiveUserEvent>& sender);
+	virtual void onEvent(kcd::BodyJointEvent what, const Subject<kcd::BodyJointEvent>& sender);
 
-	kcd::KCDDeviceRef mKinectDevice;
-	kcd::KCDRendererRef mKinectRenderer;
-	kcd::KCDActiveUserEventManagerRef mKinectUserEvents;
+private:
 
 	float						mFrameRate;
 	double mLatestFpsInfo;
 	double  mLatestTimeInfo;
 
 	bool						mFullScreen;
+	bool mHasUser;
+	
+	std::map<JointType, bool> mDrawBodyJoints;
+	std::map<JointType, ci::Vec2f> mBodyJointsPos;
 
 	ci::gl::TextureRef mColorTextureRef;
+	ci::gl::TextureRef mMaskTextureRef;
+	ci::gl::GlslProgRef mMaskRGBshader;
+	ci::gl::TextureRef sprite;
 
 #if DEBUG_DRAW
 	ci::params::InterfaceGlRef	mParams;

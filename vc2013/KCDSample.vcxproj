@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-NoItDebug|Win32">
+      <Configuration>Debug-NoItDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug-NoItDebug|x64">
+      <Configuration>Debug-NoItDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -45,7 +53,19 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
@@ -62,16 +82,26 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">temp\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'">temp\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|x64'">true</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">temp\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
@@ -80,12 +110,48 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(KINECTSDK20_DIR)\inc;$(OPENCV300_DIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\KCD\include;..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(KINECTSDK20_DIR)\inc;$(OPENCV300_DIR)\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\..\SDKs\cinder_0.8.6_vc2013\cinder_0.8.6_vc2013\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;%(AdditionalDependencies);kinect20.lib;Kinect20.Face.lib;IlmImfd.lib;ippicvmt.lib;opencv_core300d.lib;opencv_ts300d.lib;opencv_imgproc300d.lib;opencv_hal300d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CINDERSDK_DIR)\lib\msw\$(PlatformTarget);$(KINECTSDK20_DIR)\lib\$(PlatformTarget);$(OPENCV300_DIR)\x86\vc12\lib\;$(OPENCV300_DIR)\x86\vc12\staticlib\</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy /e /i /y "$(CINDERSDK_DIR)\blocks\Cinder-KCB2\lib\$(PlatformTarget)\Debug\*.dll" "$(SolutionDir)$(Configuration)\"
+xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\Kinect20.Face.dll" "$(SolutionDir)$(Configuration)\"
+xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\NuiDatabase" "$(SolutionDir)$(Configuration)\NuiDatabase"
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(KINECTSDK20_DIR)\inc;$(OPENCV300_DIR)\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -99,7 +165,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention />
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
       <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -143,15 +210,50 @@ xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\NuiDatabase" "$(
 </Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-NoItDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(CINDERSDK_DIR)\blocks\QuickTime\include\msw;$(CINDERSDK_DIR)\blocks\QuickTime\include;$(KINECTSDK20_DIR)\inc;$(CINDERSDK_DIR)\blocks\Cinder-KCB2\lib</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>"..\..\..\SDKs\cinder_0.8.6_vc2013\cinder_0.8.6_vc2013\include";..\include</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>cinder-$(PlatformToolset)_d.lib;%(AdditionalDependencies);CVClient.lib;QTMLClient.lib;KCBv2.lib;kinect20.lib;Kinect20.Face.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CINDERSDK_DIR)\lib\msw\$(PlatformTarget);$(CINDERSDK_DIR)\blocks\QuickTime\lib\msw\x86;$(KINECTSDK20_DIR)\lib\$(PlatformTarget);$(CINDERSDK_DIR)\blocks\Cinder-KCB2\lib\$(PlatformTarget)\Debug</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy /e /i /y "$(CINDERSDK_DIR)\blocks\Cinder-KCB2\lib\$(PlatformTarget)\Debug\*.dll" "$(SolutionDir)$(Configuration)\"
+xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\Kinect20.Face.dll" "$(SolutionDir)$(Configuration)\"
+xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\NuiDatabase" "$(SolutionDir)$(Configuration)\NuiDatabase"
+</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(KINECTSDK20_DIR)\inc</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\KCD\include;..\include;$(CINDERSDK_DIR)\include;$(CINDERSDK_DIR)\boost;$(OPENCV300_DIR)\include;$(KINECTSDK20_DIR)\inc</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;NOMINMAX;_WIN32_WINNT=0x0502;_HAS_ITERATOR_DEBUGGING=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -160,8 +262,8 @@ xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\NuiDatabase" "$(
       <AdditionalIncludeDirectories>"..\..\..\SDKs\cinder_0.8.6_vc2013\cinder_0.8.6_vc2013\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>cinder-$(PlatformToolset).lib;%(AdditionalDependencies);kinect20.lib;Kinect20.Face.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(CINDERSDK_DIR)\lib\msw\$(PlatformTarget);$(KINECTSDK20_DIR)\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder-$(PlatformToolset).lib;%(AdditionalDependencies);kinect20.lib;Kinect20.Face.lib;IlmImf.lib;ippicvmt.lib;opencv_core300.lib;opencv_ts300.lib;opencv_imgproc300.lib;opencv_hal300.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(CINDERSDK_DIR)\lib\msw\$(PlatformTarget);$(KINECTSDK20_DIR)\lib\$(PlatformTarget);$(OPENCV300_DIR)\x86\vc12\lib\;$(OPENCV300_DIR)\x86\vc12\staticlib\</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <SubSystem>Windows</SubSystem>
@@ -217,21 +319,37 @@ xcopy /e /i /y "$(KINECTSDK20_DIR)Redist\Face\$(PlatformTarget)\NuiDatabase" "$(
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\KCD\src\KCDActiveUserStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDBodyStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDColorStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDDeviceStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDMaskStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDPerformanceQueryStage.cpp" />
+    <ClCompile Include="..\KCD\src\KCDPipeline.cpp" />
+    <ClCompile Include="..\KCD\src\NUIManager.cpp" />
     <ClCompile Include="..\src\GlobalTime.cpp" />
-    <ClCompile Include="..\src\IKCDBindable.cpp" />
-    <ClCompile Include="..\src\KCDActiveUserEventManager.cpp" />
     <ClCompile Include="..\src\KCDApp.cpp" />
-    <ClCompile Include="..\src\KCDRenderer.cpp" />
     <ClCompile Include="..\src\Process.cpp" />
-    <ClCompile Include="src\KCDDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\GlobalTime.h" />
     <ClInclude Include="..\include\KCDApp.h" />
-    <ClInclude Include="..\include\KCDDevice.h" />
-    <ClInclude Include="..\include\KCDUtils.h" />
     <ClInclude Include="..\include\Process.h" />
     <ClInclude Include="..\include\Subject.h" />
+    <ClInclude Include="..\KCD\include\KCDActiveUserStage.h" />
+    <ClInclude Include="..\KCD\include\KCDBodyStage.h" />
+    <ClInclude Include="..\KCD\include\KCDColorStage.h" />
+    <ClInclude Include="..\KCD\include\KCDDeviceOld.h" />
+    <ClInclude Include="..\KCD\include\KCDDeviceStage.h" />
+    <ClInclude Include="..\KCD\include\KCDMaskStage.h" />
+    <ClInclude Include="..\KCD\include\KCDPerformanceQueryStage.h" />
+    <ClInclude Include="..\KCD\include\KCDPipeline.h" />
+    <ClInclude Include="..\KCD\include\KCDUtils.h" />
+    <ClInclude Include="..\KCD\include\NUIManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\maskrgb_frag.glsl" />
+    <None Include="..\assets\passThru_vert.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

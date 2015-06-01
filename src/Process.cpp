@@ -2,9 +2,8 @@
 
 using namespace std;
 
-
-
-Process::Process() : mNewData(atomic<bool>(false)), mRunning(atomic<bool>(false)), mThreadCallback(nullptr)
+//mNewData(atomic<bool>(false)),
+Process::Process() : mRunning(atomic<bool>(false)), mThreadCallback(nullptr)
 {
 
 }
@@ -20,7 +19,7 @@ void Process::start()
 
 	if (mThreadCallback != nullptr)
 	{
-		mNewData = false;
+		//mNewData = false;
 		mRunning = true;
 		mThread = shared_ptr<thread>(new thread(mThreadCallback));
 	}
